@@ -3,9 +3,13 @@ services:
   mysqldb:
     image: mysql:5.7
     restart: unless-stopped
+    networks:
+      - app.network
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=products
+      MYSQL_DATABASE: products
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 12345678
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - 3306:3306
     volumes:
@@ -25,6 +29,7 @@ services:
       - 8080:8080
     depends_on:
       - mysqldb
+    command: sh -c './wait-for mysqldb:3306 -- npm start'
 
 volumes:
   db:
