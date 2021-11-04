@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=products
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    networks:
+      - app.network
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqldb
+
+volumes:
+  db:
+
+networks:
+  app.network:
+    driver: bridge
