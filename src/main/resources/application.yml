@@ -1,16 +1,24 @@
+server:
+    port: 8080
+    servlet:
+        context-path: /api
 spring:
     datasource:
         driverClassName: com.mysql.jdbc.Driver
-        password: ''
+        password: root
         testWhileIdle: true
-        url: jdbc:mysql://mysqldb:3306/products?useTimezone=true&serverTimezone=America/Sao_Paulo
+        url: jdbc:mysql://mysqldb:3306/products?allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
         username: root
         validationQuery: SELECT 1
+        initialization-mode: always
     jpa:
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.MySQL5Dialect
         show-sql: true
+
+    flyway:
+        baselineOnMigrate: true
