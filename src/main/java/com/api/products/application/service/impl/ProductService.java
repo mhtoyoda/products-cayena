@@ -7,7 +7,6 @@ import com.api.products.application.model.OperationEnum;
 import com.api.products.application.model.OperationModel;
 import com.api.products.application.model.ProductsModel;
 import com.api.products.application.model.mapper.ProductsMapper;
-import com.api.products.application.model.mapper.SuppliersMapper;
 import com.api.products.application.service.IProductService;
 import com.api.products.domain.entity.Products;
 import com.api.products.domain.entity.Suppliers;
